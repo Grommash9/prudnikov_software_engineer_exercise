@@ -17,6 +17,16 @@ class ExchangeTest(unittest.TestCase):
         coins = my_machine.exchange(10)
         self.assertEqual(coins, {1: 10})
 
+    def test_coin_nominal_join(self):
+        my_machine = CashMachine()
+        my_machine.coins_accepted.append(0.10)
+        my_machine.add_coins(0.1, 4)
+        my_machine.add_coins(0.2, 20)
+        my_machine.add_coins(1, 9)
+        my_machine.add_coins(2, 5)
+        coins = my_machine.exchange(20)
+        self.assertEqual(coins, {0.1: 4, 0.2: 18, 1: 8, 2: 4.0})
+
     def test_many_different_coins(self):
         my_machine = CashMachine()
         my_machine.coins_accepted.append(0.10)
